@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35027.167
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Harvest", "Harvest\Harvest.csproj", "{8DB734A9-6EFB-476B-AB8B-46643141BD66}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8DB734A9-6EFB-476B-AB8B-46643141BD66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DB734A9-6EFB-476B-AB8B-46643141BD66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DB734A9-6EFB-476B-AB8B-46643141BD66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DB734A9-6EFB-476B-AB8B-46643141BD66}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4646C9EC-1545-417A-A4EF-320568B3C833}
+	EndGlobalSection
+EndGlobal
