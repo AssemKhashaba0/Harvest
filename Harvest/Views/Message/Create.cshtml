@@ -1,0 +1,71 @@
+﻿@using Models
+@model Models.Message
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">إرسال رسالة</h2>
+    <form asp-action="Create" method="post" class="form-container">
+        <div class="mb-3">
+            <label for="Name" class="form-label"><i class="fas fa-user"></i> الاسم</label>
+            <input asp-for="Name" class="form-control" id="Name" name="Name" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label for="Phone" class="form-label"><i class="fas fa-phone"></i> الهاتف</label>
+            <input asp-for="Phone" class="form-control" id="Phone" name="Phone" />
+            <span asp-validation-for="Phone" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label for="MessageContent" class="form-label"><i class="fas fa-comment"></i> المحتوى</label>
+            <textarea asp-for="MessageContent" class="form-control" id="MessageContent" name="MessageContent"></textarea>
+            <span asp-validation-for="MessageContent" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary w-100"><i class="fas fa-paper-plane"></i> إرسال</button>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+<style>
+    .form-container {
+        background-color: #f9f9f9;
+        border-radius: 12px;
+        padding: 30px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        color: #333;
+        font-family: 'Arial', sans-serif;
+        font-weight: 700;
+    }
+
+    .form-label {
+        font-size: 16px;
+        font-weight: 600;
+        color: #333;
+    }
+
+    .form-control {
+        border-radius: 8px;
+        padding: 12px;
+        font-size: 14px;
+        border: 1px solid #ddd;
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary:focus {
+        outline: none;
+    }
+
+    /* تأثير عند التمرير على الحقول */
+    .form-control:hover {
+        border-color: #007bff;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
+    }
+
+    .btn-primary:hover i {
+        animation: iconAnimation 0.3s ease-in-out;
+    }
+</style>

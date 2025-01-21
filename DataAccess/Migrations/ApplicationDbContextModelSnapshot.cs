@@ -262,36 +262,6 @@ namespace Harvest.Data.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Categories");
-                });
-
-            modelBuilder.Entity("Models.Certification", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CompanyId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("ImageUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -305,12 +275,10 @@ namespace Harvest.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CompanyId");
-
-                    b.ToTable("Certifications");
+                    b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("Models.CompanyDetail", b =>
+            modelBuilder.Entity("Models.HomePage", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -318,31 +286,53 @@ namespace Harvest.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("AboutText")
+                    b.Property<string>("CompanyOverview")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("LogoUrl")
+                    b.Property<string>("ContactNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Mission")
+                    b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("FacebookLink")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SliderImage1")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SliderImage2")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SliderImage3")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Vision")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("WhatsAppNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("YouTubeLink")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("logo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
-                    b.ToTable("CompanyDetails");
+                    b.ToTable("HomePage");
                 });
 
             modelBuilder.Entity("Models.Language", b =>
@@ -382,11 +372,13 @@ namespace Harvest.Data.Migrations
 
                     b.Property<string>("MessageContent")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Phone")
                         .IsRequired()
@@ -413,7 +405,8 @@ namespace Harvest.Data.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("ImageUrl")
                         .IsRequired()
@@ -421,15 +414,18 @@ namespace Harvest.Data.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("OriginCountry")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("PackagingDetails")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
@@ -442,65 +438,6 @@ namespace Harvest.Data.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Products");
-                });
-
-            modelBuilder.Entity("Models.Service", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CompanyId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CompanyId");
-
-                    b.ToTable("Services");
-                });
-
-            modelBuilder.Entity("Models.SliderImage", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Caption")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("SliderImages");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -554,17 +491,6 @@ namespace Harvest.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Models.Certification", b =>
-                {
-                    b.HasOne("Models.CompanyDetail", "Company")
-                        .WithMany()
-                        .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Company");
-                });
-
             modelBuilder.Entity("Models.Product", b =>
                 {
                     b.HasOne("Models.Category", "Category")
@@ -574,17 +500,6 @@ namespace Harvest.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Category");
-                });
-
-            modelBuilder.Entity("Models.Service", b =>
-                {
-                    b.HasOne("Models.CompanyDetail", "Company")
-                        .WithMany()
-                        .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Company");
                 });
 #pragma warning restore 612, 618
         }

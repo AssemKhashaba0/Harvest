@@ -1,0 +1,102 @@
+﻿@using Models
+@model IEnumerable<Product>
+
+<div class="container my-5">
+    <h1 class="text-center mb-4">إدارة المنتجات</h1>
+
+    @if (TempData["success"] != null)
+    {
+        <div class="alert alert-success text-center" role="alert">@TempData["success"]</div>
+    }
+
+    <div class="d-flex justify-content-between mb-3">
+        <div></div>
+        <a href="/Products/Create" class="btn btn-success">
+            <i class="fas fa-plus"></i> إضافة منتج جديد
+        </a>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover text-center align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>#</th>
+                    <th>الصورة</th>
+                    <th>اسم المنتج</th>
+                    <th>الوصف</th>
+                    <th>السعر</th>
+                    <th>القسم</th>
+                    <th>الإجراءات</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var product in Model)
+                {
+                    <tr>
+                        <td>@product.Id</td>
+                        <td>
+                            <img src="@product.ImageUrl" alt="@product.Name" class="product-image img-thumbnail">
+                        </td>
+                        <td>@product.Name</td>
+                        <td class="text-truncate" style="max-width: 200px;" title="@product.Description">
+                            @product.Description
+                        </td>
+                        <td>@product.Price جنيه</td>
+                        <td>@product.Category.Name</td>
+                        <td>
+                            <a href="/Products/Edit/@product.Id" class="btn btn-primary btn-sm">
+                                <i class="fas fa-edit"></i> تعديل
+                            </a>
+                            <button class="btn btn-danger btn-sm" onclick="confirmDelete(@product.Id)">
+                                <i class="fas fa-trash-alt"></i> حذف
+                            </button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- نافذة تأكيد الحذف -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">تأكيد الحذف</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="إغلاق"></button>
+            </div>
+            <div class="modal-body text-center">
+                <p>هل أنت متأكد من أنك تريد حذف هذا المنتج؟</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                <form id="deleteForm" method="post" asp-action="Delete">
+                    <input type="hidden" id="productIdToDelete" name="id">
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn btn-danger">حذف</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function confirmDelete(productId) {
+        document.getElementById('productIdToDelete').value = productId;
+        let deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+        deleteModal.show();
+    }
+</script>
+
+<style>
+    .product-image {
+        height: 60px;
+        width: 60px;
+        object-fit: cover;
+    }
+
+    .btn-sm i {
+        margin-right: 5px;
+    }
+</style>

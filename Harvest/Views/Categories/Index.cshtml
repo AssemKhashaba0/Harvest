@@ -1,0 +1,79 @@
+﻿@model List<Models.Category>
+
+<h2>الأقسام</h2>
+
+<a href="@Url.Action("Create")" class="btn btn-primary">
+    <i class="fas fa-plus"></i> إضافة قسم جديد
+</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>اسم القسم</th>
+            <th>الصورة</th>
+            <th>الإجراءات</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var category in Model)
+        {
+            <tr>
+                <td>@category.Name</td>
+                <td>
+                    @if (!string.IsNullOrEmpty(category.ImageUrl))
+                    {
+                        <img src="@category.ImageUrl" alt="@category.Name" style="width: 100px; height: 100px;" />
+                    }
+                </td>
+                <td>
+                    <a href="@Url.Action("Edit", new { id = category.Id })" class="btn btn-warning">
+                        <i class="fas fa-edit"></i> تعديل
+                    </a>
+                    <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="@category.Id">
+                        <i class="fas fa-trash-alt"></i> حذف
+                    </button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Confirmation Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form method="post" id="deleteForm">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">تأكيد الحذف</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="إغلاق">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    هل أنت متأكد أنك تريد حذف هذا القسم؟
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">إلغاء</button>
+                    <button type="submit" class="btn btn-danger">حذف</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#deleteModal').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget); // الزر الذي فتح المودال
+                var id = button.data('id'); // استرداد قيمة "id" من الزر
+
+                // تحديث الرابط الخاص بالاستمارة
+                var form = $('#deleteForm');
+                form.attr('action', '/Categories/Delete/' + id);
+            });
+        });
+    </script>
+}

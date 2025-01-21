@@ -1,0 +1,31 @@
+﻿@using Models
+@model List<Models.Message>
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">الرسائل خلال آخر 24 ساعة</h2>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover table-striped shadow-sm">
+            <thead class="thead-light">
+                <tr>
+                    <th>الاسم</th>
+                    <th>الهاتف</th>
+                    <th>المحتوى</th>
+                    <th>تاريخ الإرسال</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var message in Model)
+                {
+                    <tr>
+                        <td>@message.Name</td>
+                        <td>@message.Phone</td>
+                        <td>@message.MessageContent</td>
+                        <td>@message.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

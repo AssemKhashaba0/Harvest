@@ -1,0 +1,76 @@
+﻿@using Models
+@model Product
+
+<div class="container my-5">
+    <div class="row align-items-center">
+        <div class="col-lg-6 mb-4">
+            <div class="product-image-wrapper text-center">
+                <img src="@Model.ImageUrl" class="img-fluid rounded shadow-lg" alt="@Model.Name">
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <h1 class="text-primary fw-bold">@Model.Name</h1>
+
+            <div class="price-container mb-3">
+                @if (Model.Price == 0)
+                {
+                    <a href="/Message/Create" class="btn btn-lg btn-outline-warning px-4 py-2 fw-bold">
+                        <i class="fas fa-envelope"></i> للتواصل
+                    </a>
+                }
+                else
+                {
+                    <span class="text-success display-5 fw-bold">@Model.Price جنيه</span>
+                }
+            </div>
+
+            <p class="text-muted lead">@Model.Description</p>
+            <ul class="list-group list-group-flush border rounded shadow-sm">
+                <li class="list-group-item"><strong>بلد المنشأ:</strong> @Model.OriginCountry</li>
+                <li class="list-group-item"><strong>تفاصيل التغليف:</strong> @Model.PackagingDetails</li>
+                <li class="list-group-item"><strong>تاريخ الإضافة:</strong> @Model.CreatedAt.ToShortDateString()</li>
+            </ul>
+            <a href="/Products/UserProducts" class="btn btn-secondary mt-4 px-4 py-2">العودة</a>
+        </div>
+    </div>
+</div>
+
+<style>
+    .product-image-wrapper img {
+        max-width: 100%;
+        border-radius: 15px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        transition: transform 0.3s ease-in-out;
+    }
+
+        .product-image-wrapper img:hover {
+            transform: scale(1.05);
+        }
+
+    .price-container {
+        text-align: center;
+        padding: 15px;
+        border: 2px solid #ffc107;
+        border-radius: 10px;
+        background: #fffbee;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        display: inline-block;
+    }
+
+    .list-group-item {
+        font-size: 1.1rem;
+        background-color: #f8f9fa;
+        border-left: 4px solid #007bff;
+    }
+
+    .btn-outline-warning {
+        font-size: 1.2rem;
+        transition: all 0.3s ease-in-out;
+    }
+
+        .btn-outline-warning:hover {
+            background: #ffc107;
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(255,193,7,0.5);
+        }
+</style>

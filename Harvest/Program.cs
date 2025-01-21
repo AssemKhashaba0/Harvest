@@ -1,6 +1,9 @@
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using DataAccess;
+using DataAccess.Repository;
+using DataAccess.Repository.IRepository;
+using Models;
 namespace Harvest
 {
     public class Program
@@ -15,8 +18,31 @@ namespace Harvest
      options.UseSqlServer(connectionString));
 
 
-            builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            //builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+            //    .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            builder.Services.AddIdentity<IdentityUser, IdentityRole>(
+              Option => {
+                  Option.Password.RequiredLength = 8;
+                  Option.Password.RequireDigit = false;
+                  Option.SignIn.RequireConfirmedAccount = false;
+              })
+           .AddEntityFrameworkStores<ApplicationDbContext>()
+           .AddDefaultTokenProviders();
+
+            builder.Services.AddScoped<IRepository<Category>, CategoriesRepository>();
+            builder.Services.AddScoped<IRepository<Product>, ProductRepository>();
+            builder.Services.AddScoped<IRepository<Message>, MessageRepository>();
+            builder.Services.AddScoped<IRepository<BlogPost>, BlogPostRepository>();
+            builder.Services.AddScoped<IRepository<HomePage>, HomePageRepository>();
+
+            builder.Services.AddAuthorization(); // إضافة هذه الخدمة
+
+            // Add Controllers (if needed for MVC controllers)
+            builder.Services.AddControllers(); // إضافة هذه الخدمة إذا كنت تستخدم MVC controllers
+
+            // If you use Razor Pages, also add this
+            builder.Services.AddRazorPages();
             builder.Services.AddControllersWithViews();
 
             var app = builder.Build();

@@ -1,0 +1,84 @@
+﻿@using Models
+@model IEnumerable<Product>
+
+<div class="container my-5">
+        <h1 class="text-center mb-4">المنتجات</h1>
+
+      
+        <!-- التصنيفات -->
+        <div class="mb-4 text-center">
+            <span class="badge bg-secondary category-badge" onclick="filterByCategory(null)">الكل</span>
+            @foreach (var category in ViewBag.Categories)
+            {
+                <span class="badge bg-primary category-badge" onclick="filterByCategory(@category.Id)">
+                    @category.Name
+                </span>
+            }
+        </div>
+
+    <!-- عرض المنتجات -->
+    <div class="row">
+        @foreach (var product in Model)
+        {
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                <div class="card product-card">
+                    <img src="@product.ImageUrl" class="card-img-top" alt="@product.Name" style="height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <!-- اسم المنتج -->
+                        <h5 class="card-title">@product.Name</h5>
+
+                        <!-- وصف المنتج -->
+                        <p class="card-text text-truncate">@product.Description</p>
+
+                        <!-- بلد المنشأ -->
+                        <p class="card-text">
+                            <span class="text-muted">بلد المنشأ:</span>
+                            <span class="text-success fw-bold">@product.OriginCountry</span>
+                        </p>
+
+                        <!-- زر التفاصيل -->
+                        <a href="/Products/Details/@product.Id" class="btn btn-primary btn-sm">عرض التفاصيل</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+        <!-- الباجينايشن -->
+        <nav>
+            <ul class="pagination">
+                @for (int i = 1; i <= (int)ViewBag.TotalPages; i++)
+                {
+                    <li class="page-item @(i == (int)ViewBag.CurrentPage ? "active" : "")">
+                        <a class="page-link" href="/Products/UserProducts?page=@i&categoryId=@ViewBag.SelectedCategory">@i</a>
+                    </li>
+                }
+            </ul>
+        </nav>
+    </div>
+
+    <script>
+        function filterByCategory(categoryId) {
+            const url = new URL(window.location.href);
+            url.searchParams.set('categoryId', categoryId || '');
+            window.location.href = url.toString();
+        }
+    </script>
+    <style>
+    .product-card {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s;
+    }
+
+        .product-card:hover {
+            transform: scale(1.05);
+        }
+
+    .category-badge {
+        cursor: pointer;
+    }
+
+    .pagination {
+        justify-content: center;
+    }
+    </style>

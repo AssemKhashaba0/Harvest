@@ -1,18 +1,37 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+﻿
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Harvest</title>
+    <title>@ViewData["Title"] - هارفست</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Harvest.styles.css" asp-append-version="true" />
+    <style>
+        body {
+            direction: rtl;
+            text-align: right;
+        }
+        .navbar, .footer {
+            background-color: #007bff;
+        }
+        .navbar-brand, .nav-link, .footer {
+            color: white !important;
+        }
+        .navbar-brand:hover, .nav-link:hover {
+            color: #ddd !important;
+        }
+    </style>
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-primary border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Harvest</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <img src="~/logo/logo.png" alt="Logo" style="max-height: 50px; width: auto;">
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -20,10 +39,41 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">الرئيسية</a>
+                        </li>
+                        
+                        @if (User.IsInRole("Admin") || User.IsInRole("SubAdmin"))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                    لوحه التحكم
+                                </a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="/Categories/index">الاقسام</a>
+                                    <a class="dropdown-item" href="/Products/AdminProducts">المنتجات</a>
+                                    <a class="dropdown-item" href="/home/Edit/3">الصفحه الرئيسيه</a>
+                                    <a class="dropdown-item" href="/Article/Create">ادارة المقالات</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="/Message/index">الرسائل</a>
+                                    <a class="dropdown-item" href="/Message/Last24Hours">الرسائل اخر 24 ساعه</a>
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        <a class="dropdown-item" href="/Admin/CreateUser">انشاء ادمين جديد</a>
+                                        <a class="dropdown-item" href="/Admin/ListUsers">كل الادمين</a>
+                                    }
+                                </div>
+                            </li>
+                        }
+
+                       
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Products/UserProducts">منتاجتنا</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link" href="/Message/Create">تواصل معانا</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Article/index">المقالات</a>
                         </li>
                     </ul>
                     <partial name="_LoginPartial" />
@@ -37,9 +87,9 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-muted bg-primary">
         <div class="container">
-            &copy; 2025 - Harvest - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2025 - هارفست - <a asp-area="" asp-controller="Home" asp-action="Privacy" style="color: white;">سياسة الخصوصية</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
@@ -48,3 +98,7 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+
+
+
+

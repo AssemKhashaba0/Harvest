@@ -1,0 +1,26 @@
+﻿<!-- بوب أب ثابت باستخدام مودال من بوتستراب -->
+<div class="modal show" id="thankYouModal" tabindex="-1" role="dialog" aria-labelledby="thankYouModalLabel" aria-hidden="true" style="display: block;">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="thankYouModalLabel">شكراً للتواصل معنا!</h5>
+            </div>
+            <div class="modal-body text-center">
+                <i class="fa fa-thumbs-up" style="font-size: 80px; color: #28a745;"></i>
+                <p>لقد تم إرسال رسالتك بنجاح. <br>سوف نتواصل معك في أقرب وقت.</p>
+                <a href="/" class="btn btn-primary"><i class="fa fa-home"></i> العودة إلى الصفحة الرئيسية</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // عرض المودال بعد تحميل الصفحة
+    window.onload = function () {
+        // تأكد من أن المودال يظل مفتوحاً بعد تحميل الصفحة
+        $('#thankYouModal').modal({
+            backdrop: 'static',
+            keyboard: false
+        });
+    };
+</script>

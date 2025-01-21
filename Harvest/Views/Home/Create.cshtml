@@ -1,0 +1,50 @@
+﻿@using Models
+@model Models.HomePage
+
+<form asp-action="Create" method="post" enctype="multipart/form-data">
+    <div>
+        <label for="CompanyOverview">مراجعة الشركة</label>
+        <textarea id="CompanyOverview" name="CompanyOverview"></textarea>
+    </div>
+    <div>
+        <label for="Vision">الرؤية</label>
+        <textarea id="Vision" name="Vision"></textarea>
+    </div>
+    <div>
+        <label for="FacebookLink">الرؤية</label>
+        <textarea id="FacebookLink" name="FacebookLink"></textarea>
+    </div>
+    <div>
+        <label for="YouTubeLink">الرؤية</label>
+        <textarea id="YouTubeLink" name="YouTubeLink"></textarea>
+    </div>
+    <div>
+        <label for="WhatsAppNumber">الرؤية</label>
+        <textarea id="WhatsAppNumber" name="WhatsAppNumber"></textarea>
+    </div>
+    <div>
+        <label for="ContactNumber">الرؤية</label>
+        <textarea id="ContactNumber" name="ContactNumber"></textarea>
+    </div>
+    <div>
+        <label for="Email">الرؤية</label>
+        <textarea id="Email" name="Email"></textarea>
+    </div>
+    <div>
+        <label for="logo">شعار الشركة</label>
+        <input type="file" id="logo" name="logo" />
+    </div>
+    <div>
+        <label for="SliderImage1">الصورة 1</label>
+        <input type="file" id="SliderImage1" name="sliderImage1" />
+    </div>
+    <div>
+        <label for="SliderImage2">الصورة 2</label>
+        <input type="file" id="SliderImage2" name="sliderImage2" />
+    </div>
+    <div>
+        <label for="SliderImage3">الصورة 3</label>
+        <input type="file" id="SliderImage3" name="sliderImage3" />
+    </div>
+    <button type="submit">حفظ</button>
+</form>

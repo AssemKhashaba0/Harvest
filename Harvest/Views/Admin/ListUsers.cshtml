@@ -1,0 +1,68 @@
+﻿@using Microsoft.AspNetCore.Identity
+
+@model IEnumerable<IdentityUser>
+
+@{
+    ViewData["Title"] = "قائمة المستخدمين";
+}
+
+<div class="container mt-5">
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            @TempData["Error"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @TempData["Success"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <h2 class="text-center mb-4">@ViewData["Title"]</h2>
+
+    <table class="table table-bordered table-hover text-center">
+        <thead class="table-dark">
+            <tr>
+                <th>اسم المستخدم</th>
+                <th>الإجراءات</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (!Model.Any())
+            {
+                <tr>
+                    <td colspan="2">لا يوجد مستخدمون حاليًا.</td>
+                </tr>
+            }
+            else
+            {
+                @foreach (var user in Model)
+                {
+                    <tr>
+                        <td>@user.UserName</td>
+                        <td>
+                            <form asp-action="DeleteUser" asp-controller="Admin" method="post" class="d-inline" onsubmit="return confirmDelete();">
+                                <input type="hidden" name="id" value="@user.Id" />
+                                <button type="submit" class="btn btn-danger btn-sm">
+                                    <i class="fas fa-trash-alt"></i> حذف
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts {
+    <script>
+        function confirmDelete() {
+            return confirm('هل أنت متأكد أنك تريد حذف هذا المستخدم؟');
+        }
+    </script>
+}

@@ -1,0 +1,124 @@
+﻿@using Models
+@model Models.HomePage
+
+<form asp-action="Edit" method="post" enctype="multipart/form-data">
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-12">
+                <div class="card mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h5>معلومات عامة</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-12">
+                                <div class="form-group">
+                                    <label for="CompanyOverview">مراجعة الشركة</label>
+                                    <textarea id="CompanyOverview" name="CompanyOverview" class="form-control" placeholder="أدخل مراجعة الشركة">@Model.CompanyOverview</textarea>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-12">
+                                <div class="form-group">
+                                    <label for="Vision">الرؤية</label>
+                                    <textarea id="Vision" name="Vision" class="form-control" placeholder="أدخل الرؤية">@Model.Vision</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-4">
+                    <div class="card-header bg-secondary text-white">
+                        <h5>روابط ومعلومات التواصل</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-12">
+                                <div class="form-group">
+                                    <label for="FacebookLink"><i class="fab fa-facebook"></i> رابط فيسبوك</label>
+                                    <input type="text" id="FacebookLink" name="FacebookLink" class="form-control" value="@Model.FacebookLink" placeholder="أدخل رابط الفيسبوك" />
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-12">
+                                <div class="form-group">
+                                    <label for="YouTubeLink"><i class="fab fa-youtube"></i> رابط يوتيوب</label>
+                                    <input type="text" id="YouTubeLink" name="YouTubeLink" class="form-control" value="@Model.YouTubeLink" placeholder="أدخل رابط اليوتيوب" />
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-12">
+                                <div class="form-group">
+                                    <label for="WhatsAppNumber"><i class="fab fa-whatsapp"></i> رقم واتساب</label>
+                                    <input type="text" id="WhatsAppNumber" name="WhatsAppNumber" class="form-control" value="@Model.WhatsAppNumber" placeholder="أدخل رقم الواتساب" />
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-12">
+                                <div class="form-group">
+                                    <label for="ContactNumber"><i class="fas fa-phone"></i> رقم الاتصال</label>
+                                    <input type="text" id="ContactNumber" name="ContactNumber" class="form-control" value="@Model.ContactNumber" placeholder="أدخل رقم الاتصال" />
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-12">
+                                <div class="form-group">
+                                    <label for="Email"><i class="fas fa-envelope"></i> البريد الإلكتروني</label>
+                                    <input type="email" id="Email" name="Email" class="form-control" value="@Model.Email" placeholder="أدخل البريد الإلكتروني" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-4">
+                    <div class="card-header bg-success text-white">
+                        <h5>الصور</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-6">
+                                <div class="form-group">
+                                    <label for="logo">شعار الشركة</label>
+                                    <input type="file" id="logo" name="logo" class="form-control-file" onchange="previewImage(event, 'logoPreview')" />
+                                    <img id="logoPreview" class="img-fluid mt-2 border" src="@Model.logo" style="display:block;" alt="شعار الشركة" />
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6">
+                                <div class="form-group">
+                                    <label for="SliderImage1">الصورة 1</label>
+                                    <input type="file" id="SliderImage1" name="sliderImage1" class="form-control-file" onchange="previewImage(event, 'sliderImage1Preview')" />
+                                    <img id="sliderImage1Preview" class="img-fluid mt-2 border" src="@Model.SliderImage1" style="display:block;" alt="الصورة 1" />
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6">
+                                <div class="form-group">
+                                    <label for="SliderImage2">الصورة 2</label>
+                                    <input type="file" id="SliderImage2" name="sliderImage2" class="form-control-file" onchange="previewImage(event, 'sliderImage2Preview')" />
+                                    <img id="sliderImage2Preview" class="img-fluid mt-2 border" src="@Model.SliderImage2" style="display:block;" alt="الصورة 2" />
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6">
+                                <div class="form-group">
+                                    <label for="SliderImage3">الصورة 3</label>
+                                    <input type="file" id="SliderImage3" name="sliderImage3" class="form-control-file" onchange="previewImage(event, 'sliderImage3Preview')" />
+                                    <img id="sliderImage3Preview" class="img-fluid mt-2 border" src="@Model.SliderImage3" style="display:block;" alt="الصورة 3" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block mt-3">حفظ</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script>
+    function previewImage(event, previewId) {
+        var reader = new FileReader();
+        reader.onload = function () {
+            var output = document.getElementById(previewId);
+            output.src = reader.result;
+            output.style.display = 'block';
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    }
+</script>
